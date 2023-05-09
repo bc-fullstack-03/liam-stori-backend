@@ -1,0 +1,19 @@
+Entidades:
+-- User: Representa um usuário da aplicação. Possui informações como nome, email, senha, status de usuário, etc.
+-- Post: Refere-se a uma postagem feita por um usuário na aplicação. Contém informações como título, conteúdo, autor, data de criação, likes, comentários, etc.
+-- CommentPost: Representa um comentário feito em um post. Contém informações como o conteúdo do comentário, autor, data de criação, likes, etc.
+-- Friendship: Refere-se à relação de amizade entre dois usuários na aplicação. Armazena informações como os IDs dos usuários envolvidos na amizade, status da amizade (pendente, aceita, recusada), data de criação, etc.
+-- Blacklist: É uma lista negra que armazena tokens inválidos ou revogados. É utilizada para bloquear o acesso de tokens de autenticação que foram desabilitados ou expiraram. Contém informações como o token em si, ID do usuário associado ao token e horário de cancelamento.
+
+Regras de negócio:
+-- Autenticação de Usuário: Os usuários devem fornecer credenciais válidas (como nome de usuário e senha) para acessar recursos protegidos da aplicação. A autenticação deve ser feita de forma segura e garantir que apenas usuários autenticados tenham acesso autorizado.
+-- Autorização de Acesso: Autorização de Acesso: Os usuários têm dois níveis de acesso e permissões na aplicação, dependendo de seu papel ou função. As regras de autorização garantem que os usuários sem autenticação possa acessar a aplicação para criar uma conta e realizar login, todos os outros recursos e funcionalidades são de exclusividade de autenticados.
+-- Gerenciamento de Amizades: Os usuários podem se conectar uns aos outros como amigos na aplicação. Essa funcionalidade inclui o envio de solicitações de amizade, aceitação ou recusa de solicitações e a exibição da lista de amigos de um usuário. Caso ambas as partes solicitem a amizade, a confirmação de aceitação de amizade é automática. Caso um usuário recuse um pedido de amizade, o usuário que teve a solicitação recusada não tem acesso a está informação e pode solicitar novamente a amizade.
+-- Publicação de Posts: Os usuários podem criar e publicar posts na aplicação. Os posts devem ser visíveis de acordo com o status de visibilidade que o usuário selecionar no momento da criação, e as relações de amizade estabelecidas com outros usuários. Um post é visível para qualquer usuário quando é público, apenas para amigos, apenas os amigos do autor podem visualizar, apenas seguidores, apenas seguidores podem visualizar e amigos e seguidores, ambos podem visualizar.
+-- Comentários em Posts: Os usuários podem comentar em posts de outros usuários.
+-- Bloqueio de Tokens: A aplicação deve manter uma lista negra de tokens inválidos ou revogados para impedir o uso indevido de tokens de autenticação. Os tokens são acrescentados a lista negra caso o usuário efetue logout ou delete sua conta.
+
+Obs:
+-- Quando um usuário é deletado da aplicação, é necessário garantir que seus dados pessoais, posts e comentários não sejam exibidos publicamente. No entanto, os registros relacionados ao usuário devem ser mantidos no banco de dados por motivos de integridade e histórico.
+-- Um post na aplicação pode ter tanto imagens quanto um conteúdo textual associado. Isso permite aos usuários compartilhar fotos e adicionar informações, descrições ou mensagens relacionadas ao post por meio do conteúdo textual.
+-- Um usuário pode ter posts, pode ter amigos, pode ter seguidores e pode seguir outros usuários.
